@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - WinPosition
+  - ball1
+  - ball2
+  - ball3
+  - wall
   layers:
   - Default
   - TransparentFX

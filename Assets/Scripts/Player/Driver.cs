@@ -19,16 +19,13 @@ public class Driver : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (!active) { return; }
-        Vector3 newpos = new Vector3(playerTransform.localPosition.x, playerTransform.localPosition.y, -slider.value);
-        playerTransform.localPosition = newpos;
-    }
-    public void EnableDriving(bool enable)
-    {
-        active = enable;    
-    }
+    //void Update()
+    //{
+    //    if (!active) { return; }
+    //    Vector3 newpos = new Vector3(-slider.value, playerTransform.localPosition.x, playerTransform.localPosition.y);
+    //    playerTransform.localPosition = newpos;
+    //}
+    
 
     //public void MovePlayerToCenter()
     //{

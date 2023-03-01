@@ -20,9 +20,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Driver driver;
 
     [SerializeField] private float stepWin;
+    private bool isMoving = false;
 
     private Touch touch;
     private float deltaTouchBefore = 0f;
+
+    private bool active { get; set; }
     private void Awake()
     {
         instance = this;
@@ -32,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         _animator = GetComponent<Animator>();
-        driver.EnableDriving(true);
+        EnableDriving(true);
 
 
     }
@@ -44,22 +47,21 @@ public class PlayerMovement : MonoBehaviour
             Win();
             return;
         }
-        
-        if (GetTouchMove())
+        GetTouchMove();
+        if (isMoving)
         {
             MovePlayer();
         }
         
+
     }
 
-    private bool GetTouchMove()
+    private void GetTouchMove()
     {
-        //input = - Input.GetAxis(horizontal);
-
-        //Debug.Log(input);
         if (Input.touchCount > 0)
         {
             touch = Input.GetTouch(0);
+            isMoving = true;
 
             if (touch.phase == TouchPhase.Moved)
             {
@@ -75,13 +77,10 @@ public class PlayerMovement : MonoBehaviour
                         {
                             Sliderslider.value += 0.08f;
                         }
-                        return true;
                     }
                 }
             }
         }
-
-        return false;
     }
     public void SetEndPoint(Vector3 endpoint)
     {
@@ -89,17 +88,13 @@ public class PlayerMovement : MonoBehaviour
     }
     void MovePlayer()
     {
-       Debug.Log("moving");
-        transform.Translate(EndPoint.normalized *speed*Time.deltaTime);
-
+        //Debug.Log(Sliderslider.value);
+        transform.position = Vector3.MoveTowards(transform.position,new Vector3(Sliderslider.value, 0, transform.position.z + 0.5f), speed * Time.deltaTime);
         _animator.SetBool("Run", true);
     }
     public void MoveToWinPoint(Vector3 End)
     {
         win = true;
-        //EndPoint = End;
-        //Vector3 position = Vector3.Lerp(player.transform.position, End, 1f);
-        //player.transform.position = Vector3.MoveTowards(player.transform.position, position, speed*2);
         player.velocity = Vector3.zero;
         StartCoroutine(SwitchAnimation());
         
@@ -107,8 +102,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Win()
     {
-        Debug.Log(EndPoint);
-        driver.EnableDriving(false);
+        EnableDriving(false);
         player.transform.position = Vector3.Lerp(player.transform.position, EndPoint, stepWin);
     }
 
@@ -117,5 +111,9 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(.8f);
         _animator.SetBool("Run", false);
         _animator.SetBool("Dance", true);
+    }
+    public void EnableDriving(bool enable)
+    {
+        active = enable;
     }
 }
