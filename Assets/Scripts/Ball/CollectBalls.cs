@@ -37,14 +37,19 @@ public class CollectBalls : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(Wall))
         {
-            SetMinusBall(BallCollections.GetChild(BallCollections.childCount-1));
-            for (int i = 0; i < BallCollections.childCount; i++)
+            collision.gameObject.TryGetComponent<Wall>(out var Wall);
+            if (!Wall.hasCollide)
             {
-                LiftPlayer(BallCollections.GetChild(i), -1);
+
+                SetMinusBall(BallCollections.GetChild(BallCollections.childCount - 1));
+                for (int i = 0; i < BallCollections.childCount; i++)
+                {
+                    LiftPlayer(BallCollections.GetChild(i), -1);
+                }
+                SetStickManTransform(-1, StickManTransform);
+                //Player.transform.position = new Vector3(Player.transform.position.x, Player.transform.position.y + 0.3f, Player.transform.position.z + 0.2f);
+                Player.transform.position = new Vector3(Player.transform.position.x, 1.2f, Player.transform.position.z + 0.4f);
             }
-            SetStickManTransform(-1, collision.gameObject.transform);
-            Player.transform.position = new Vector3(Player.transform.position.x, Player.transform.position.y + 0.3f, Player.transform.position.z + 0.2f);
-            
         }
     }
 
@@ -64,5 +69,6 @@ public class CollectBalls : MonoBehaviour
     private void SetMinusBall(Transform trans)
     {
         trans.SetParent(ObjectPoll, true);
+        trans.position = new Vector3(trans.position.x, trans.position.y, trans.position.z -0.2f);
     }
 }
