@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody player;
 
     bool win = false;
-    private Vector3 EndPoint;
+    public Vector3 EndPoint;
 
     [SerializeField] private Slider Sliderslider;
 
@@ -45,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
         if (win)
         {
             Win();
+            SetVelocity();
             return;
         }
         GetTouchMove();
@@ -52,8 +53,6 @@ public class PlayerMovement : MonoBehaviour
         {
             MovePlayer();
         }
-        
-
     }
 
     private void GetTouchMove()
@@ -111,6 +110,11 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(.8f);
         _animator.SetBool("Run", false);
         _animator.SetBool("Dance", true);
+    }
+    IEnumerator SetVelocity()
+    {
+        yield return new WaitForSeconds(.8f);
+        player.velocity = Vector3.zero;
     }
     public void EnableDriving(bool enable)
     {

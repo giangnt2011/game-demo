@@ -18,6 +18,7 @@ public class GotoWinPoint : MonoBehaviour
         if (other.gameObject.CompareTag(PlayerTag)){
 
             PlayerMovement.instance.MoveToWinPoint(End.transform.position);
+
         }
     }
 }

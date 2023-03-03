@@ -9,6 +9,8 @@ TagManager:
   - ball2
   - ball3
   - wall
+  - coin
+  - ballWin
   layers:
   - Default
   - TransparentFX

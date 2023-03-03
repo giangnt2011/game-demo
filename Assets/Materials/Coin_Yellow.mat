@@ -75,8 +75,8 @@ Material:
     - Color_28180829: {r: 1, g: 0.4116228, b: 0, a: 1}
     - Color_57D43A16: {r: 1, g: 0.84696025, b: 0, a: 1}
     - Color_F689E8B9: {r: 1, g: 0.99862754, b: 0, a: 1}
-    - _BASE_COLOR: {r: 1, g: 0.92081726, b: 0, a: 1}
-    - _EMISSION_COLOR: {r: 1, g: 0.697198, b: 0, a: 1}
+    - _BASE_COLOR: {r: 1, g: 0.92156863, b: 0, a: 1}
+    - _EMISSION_COLOR: {r: 1, g: 0.697198, b: 0, a: 0}
     - _SPECULAR_COLOR: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &4950794198137125819
